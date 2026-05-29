@@ -1,0 +1,99 @@
+/* ===========================================================================
+   O2 Design System v1.0 — tokens.css
+   Fonte de verdade visual. Importar ANTES de qualquer outro CSS.
+   Portado verbatim de ~/Desktop/O2/o2-design-system.md (seções 2.5, 2.6, 3.2, 4.1)
+   =========================================================================== */
+
+/* --- Tusker Grotesk (auto-hospedada). Baixar de:
+   https://drive.google.com/drive/folders/17lPQpGGy9ul1R6fnOGKa3K3yM3AuOpIm
+   e colocar os .woff2 em public/fonts/tusker-grotesk/.
+   Enquanto ausente, cai no fallback Anton/Barlow Condensed (Google Fonts). --- */
+@font-face {
+  font-family: 'Tusker Grotesk';
+  src: url('/fonts/tusker-grotesk/TuskerGrotesk-3600Semi.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Tusker Grotesk';
+  src: url('/fonts/tusker-grotesk/TuskerGrotesk-4700Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Tusker Grotesk';
+  src: url('/fonts/tusker-grotesk/TuskerGrotesk-7800Super.woff2') format('woff2');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* Fontes */
+  --font-mono:         'JetBrains Mono', 'Consolas', 'Menlo', monospace;
+  --font-display:      'Tusker Grotesk', 'Anton', 'Barlow Condensed', 'Impact', sans-serif;
+  --font-display-wide: 'Barlow Condensed', 'Anton', 'Impact', sans-serif;
+  --font-body:         'Montserrat', system-ui, -apple-system, sans-serif;
+
+  /* Paleta da marca */
+  --lima-500: #00D842;
+  --lima-400: #63F161;
+  --lima-600: #00B038;
+  --ink-900:  #212121;
+  --ink-700:  #494949;
+  --ink-500:  #676767;
+  --ink-300:  #AAAAAA;
+  --ink-200:  #BFBFBF;
+  --ink-150:  #EAEAEA;
+  --white:    #FFFFFF;
+  --black:    #000000;
+
+  /* Tokens semânticos — DARK MODE (padrão) */
+  --bg:             #3A3A3A;
+  --bg-elev:        #2E2E2E;
+  --bg-elev-2:      #252525;
+  --surface:        #4A4A4A;
+  --border:         rgba(255, 255, 255, 0.10);
+  --border-strong:  rgba(255, 255, 255, 0.20);
+  --fg:             #FAFAFA;
+  --fg-muted:       #C4C4C4;
+  --fg-subtle:      #9A9A9A;
+  --accent:         var(--lima-400);
+  --accent-ink:     #0A0A0A;
+  --accent-soft:    rgba(99, 241, 97, 0.14);
+
+  /* Forma */
+  --radius-sm:   6px;
+  --radius:      12px;
+  --radius-lg:   20px;
+  --radius-pill: 999px;
+
+  /* Sombras */
+  --shadow-sm: 0 1px 2px  rgba(0,0,0,0.2);
+  --shadow-md: 0 4px 16px rgba(0,0,0,0.25);
+  --shadow-lg: 0 16px 48px rgba(0,0,0,0.4);
+
+  /* Easing único da plataforma */
+  --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+
+  /* Containers */
+  --container:      1320px;
+  --container-wide: 1480px;
+}
+
+[data-theme="light"] {
+  --bg:             #FBFBFA;
+  --bg-elev:        #FFFFFF;
+  --bg-elev-2:      #F4F4F3;
+  --surface:        #FFFFFF;
+  --border:         rgba(0, 0, 0, 0.08);
+  --border-strong:  rgba(0, 0, 0, 0.18);
+  --fg:             #111111;
+  --fg-muted:       #555555;
+  --fg-subtle:      #888888;
+  --accent:         var(--lima-500);
+  --accent-ink:     #FFFFFF;
+  --accent-soft:    rgba(0, 216, 66, 0.10);
+}

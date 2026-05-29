@@ -9,8 +9,32 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as VersionsRouteImport } from './routes/versions'
+import { Route as StorytellingRouteImport } from './routes/storytelling'
+import { Route as GenerateRouteImport } from './routes/generate'
+import { Route as DeckConfigRouteImport } from './routes/deck-config'
 import { Route as IndexRouteImport } from './routes/index'
 
+const VersionsRoute = VersionsRouteImport.update({
+  id: '/versions',
+  path: '/versions',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StorytellingRoute = StorytellingRouteImport.update({
+  id: '/storytelling',
+  path: '/storytelling',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GenerateRoute = GenerateRouteImport.update({
+  id: '/generate',
+  path: '/generate',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DeckConfigRoute = DeckConfigRouteImport.update({
+  id: '/deck-config',
+  path: '/deck-config',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -19,28 +43,78 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/deck-config': typeof DeckConfigRoute
+  '/generate': typeof GenerateRoute
+  '/storytelling': typeof StorytellingRoute
+  '/versions': typeof VersionsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/deck-config': typeof DeckConfigRoute
+  '/generate': typeof GenerateRoute
+  '/storytelling': typeof StorytellingRoute
+  '/versions': typeof VersionsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/deck-config': typeof DeckConfigRoute
+  '/generate': typeof GenerateRoute
+  '/storytelling': typeof StorytellingRoute
+  '/versions': typeof VersionsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/deck-config' | '/generate' | '/storytelling' | '/versions'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/deck-config' | '/generate' | '/storytelling' | '/versions'
+  id:
+    | '__root__'
+    | '/'
+    | '/deck-config'
+    | '/generate'
+    | '/storytelling'
+    | '/versions'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  DeckConfigRoute: typeof DeckConfigRoute
+  GenerateRoute: typeof GenerateRoute
+  StorytellingRoute: typeof StorytellingRoute
+  VersionsRoute: typeof VersionsRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/versions': {
+      id: '/versions'
+      path: '/versions'
+      fullPath: '/versions'
+      preLoaderRoute: typeof VersionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/storytelling': {
+      id: '/storytelling'
+      path: '/storytelling'
+      fullPath: '/storytelling'
+      preLoaderRoute: typeof StorytellingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/generate': {
+      id: '/generate'
+      path: '/generate'
+      fullPath: '/generate'
+      preLoaderRoute: typeof GenerateRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/deck-config': {
+      id: '/deck-config'
+      path: '/deck-config'
+      fullPath: '/deck-config'
+      preLoaderRoute: typeof DeckConfigRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -53,6 +127,10 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  DeckConfigRoute: DeckConfigRoute,
+  GenerateRoute: GenerateRoute,
+  StorytellingRoute: StorytellingRoute,
+  VersionsRoute: VersionsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

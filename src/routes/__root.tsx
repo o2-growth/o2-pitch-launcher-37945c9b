@@ -10,7 +10,11 @@ import {
 import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
+import o2Css from "../styles/o2-ds.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { BrandMark } from "../components/BrandMark";
+import { Icon } from "../components/Icons";
+import { useTheme } from "../hooks/useTheme";
 
 function NotFoundComponent() {
   return (
@@ -77,20 +81,18 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary" },
-      { name: "twitter:site", content: "@Lovable" },
+      { title: "O2 Pitch Engine" },
+      { name: "description", content: "Teaser e Book auto-atualizados de Oxy + BP + Storytelling." },
     ],
     links: [
+      { rel: "preconnect", href: "https://fonts.googleapis.com" },
+      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
         rel: "stylesheet",
-        href: appCss,
+        href: "https://fonts.googleapis.com/css2?family=Anton&family=Barlow+Condensed:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500;600&family=Montserrat:wght@300;400;500;600;700;800&display=swap",
       },
+      { rel: "stylesheet", href: appCss },
+      { rel: "stylesheet", href: o2Css },
     ],
   }),
   shellComponent: RootShell,
@@ -101,7 +103,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="pt-BR" data-theme="dark">
       <head>
         <HeadContent />
       </head>
@@ -113,13 +115,59 @@ function RootShell({ children }: { children: ReactNode }) {
   );
 }
 
+const NAV = [
+  { to: "/", label: "Dashboard", exact: true },
+  { to: "/storytelling", label: "Storytelling" },
+  { to: "/deck-config", label: "Configuração" },
+  { to: "/generate", label: "Gerar" },
+  { to: "/versions", label: "Versões" },
+];
+
+function Chrome() {
+  const { theme, toggleTheme } = useTheme();
+  return (
+    <>
+      <header className="site-header">
+        <div className="inner">
+          <Link to="/" className="brand">
+            <span className="brand-mark"><BrandMark size={30} /></span>
+            <span className="brand-sep" />
+            <span className="brand-name">O2 Pitch Engine</span>
+          </Link>
+          <nav className="nav-desktop">
+            {NAV.map((n) => (
+              <Link key={n.to} to={n.to} activeProps={{ className: "active" }}
+                activeOptions={n.exact ? { exact: true } : undefined}>
+                <span className="dot" />{n.label}
+              </Link>
+            ))}
+          </nav>
+          <div className="header-actions">
+            <button type="button" className="icon-btn" onClick={toggleTheme}
+              aria-label={`Trocar para tema ${theme === "dark" ? "claro" : "escuro"}`}>
+              {theme === "dark" ? <Icon.Sun /> : <Icon.Moon />}
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <main><Outlet /></main>
+
+      <footer className="site-footer">
+        <div className="meta">
+          <span>O2 Inc. · Pitch Engine · MVP</span>
+          <span>Confidencial · Dados mock</span>
+        </div>
+      </footer>
+    </>
+  );
+}
+
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
-
   return (
     <QueryClientProvider client={queryClient}>
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <Outlet />
+      <Chrome />
     </QueryClientProvider>
   );
 }

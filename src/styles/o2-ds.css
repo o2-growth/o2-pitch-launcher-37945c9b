@@ -1,0 +1,5 @@
+/* O2 Design System v1.0 — agregador. Carregado DEPOIS do styles.css (Tailwind/shadcn)
+   para que os tokens semânticos O2 (--bg, --accent, etc.) sejam a verdade visual do app. */
+@import './tokens.css';
+@import './globals.css';
+@import './components.css';

@@ -1,0 +1,100 @@
+/* ===========================================================================
+   O2 Design System v1.0 — globals.css
+   Reset, body, container, tipografia base, eyebrow, grids.
+   =========================================================================== */
+
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  transition: background .3s var(--ease), color .3s var(--ease);
+}
+a      { color: inherit; text-decoration: none; }
+button { font-family: inherit; }
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 400; /* peso visual vem da própria família condensada */
+  text-transform: uppercase;
+  letter-spacing: 0.005em;
+  margin: 0;
+}
+
+h1 { font-size: clamp(64px, 11vw, 180px); line-height: 0.96; }
+h2 { font-size: clamp(36px, 5.6vw, 72px); line-height: 1.05; }
+h3 { font-size: clamp(22px, 2.4vw, 32px); line-height: 1.1; }
+h4 { font-size: clamp(18px, 2vw, 24px); line-height: 1.15; }
+
+p { margin: 0; }
+
+/* Containers */
+.container, .container-wide {
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+.container       { max-width: var(--container); }
+.container-wide  { max-width: var(--container-wide); }
+
+@media (min-width: 768px) {
+  .container, .container-wide { padding: 0 48px; }
+}
+
+section.block { padding: 48px 0; }
+@media (min-width: 768px) { section.block { padding: 80px 0; } }
+
+/* Eyebrow */
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--fg-subtle);
+}
+
+/* Mono helper */
+.mono {
+  font-family: var(--font-mono);
+  letter-spacing: 0.06em;
+}
+
+/* Grids responsivos utilitários */
+.auto-grid-200 { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
+.auto-grid-220 { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+.auto-grid-240 { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+.auto-grid-260 { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+.auto-grid-280 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
+.auto-grid-300 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; }
+.auto-grid-320 { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px; }
+
+@media (max-width: 767px) {
+  .auto-grid-200, .auto-grid-220, .auto-grid-240, .auto-grid-260,
+  .auto-grid-280, .auto-grid-300, .auto-grid-320 {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 14px;
+  }
+}
+
+/* Animações nomeadas */
+@keyframes breathe {
+  0%, 100% { transform: scale(1);    filter: drop-shadow(0 0 0   var(--accent-soft)); }
+  50%      { transform: scale(1.03); filter: drop-shadow(0 0 24px var(--accent)); }
+}
+.breathe { animation: breathe 3.6s var(--ease) infinite; }
+
+@keyframes dl-fade {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Foco acessível */
+:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--accent-soft);
+  border-radius: var(--radius-sm);
+}
