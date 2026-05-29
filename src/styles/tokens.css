@@ -8,27 +8,9 @@
    https://drive.google.com/drive/folders/17lPQpGGy9ul1R6fnOGKa3K3yM3AuOpIm
    e colocar os .woff2 em public/fonts/tusker-grotesk/.
    Enquanto ausente, cai no fallback Anton/Barlow Condensed (Google Fonts). --- */
-@font-face {
-  font-family: 'Tusker Grotesk';
-  src: url('/fonts/tusker-grotesk/TuskerGrotesk-3600Semi.woff2') format('woff2');
-  font-weight: 600;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Tusker Grotesk';
-  src: url('/fonts/tusker-grotesk/TuskerGrotesk-4700Bold.woff2') format('woff2');
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Tusker Grotesk';
-  src: url('/fonts/tusker-grotesk/TuskerGrotesk-7800Super.woff2') format('woff2');
-  font-weight: 900;
-  font-style: normal;
-  font-display: swap;
-}
+/* @font-face desativados enquanto os .woff2 da Tusker Grotesk não estão em
+   public/fonts/tusker-grotesk/. Reative ao adicionar os arquivos. Por
+   enquanto, o fallback Anton/Barlow Condensed assume sem 404 no console. */
 
 :root {
   /* Fontes */
