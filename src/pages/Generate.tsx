@@ -15,6 +15,7 @@ type Kind = 'teaser' | 'book';
 export function Generate() {
   const [src, setSrc] = useState<Sources | null>(null);
   const [kind, setKind] = useState<Kind | null>(null);
+  const [downloadTick, setDownloadTick] = useState(0);
   const [archived, setArchived] = useState('');
 
   useEffect(() => { loadAllSources().then(setSrc); }, []);
@@ -25,6 +26,7 @@ export function Generate() {
 
   async function generate(k: Kind) {
     setKind(k);
+    setDownloadTick((t) => t + 1);
     try {
       const snap = await createSnapshot(k, 'manual', src!);
       setArchived(`Snapshot ${k} arquivado · ${new Date(snap.created_at).toLocaleTimeString('pt-BR')}`);
@@ -57,7 +59,14 @@ export function Generate() {
             {kind && (
               <ClientOnly>
                 <Suspense fallback={<span className="mono" style={{ fontSize: 11, color: 'var(--fg-subtle)' }}>preparando…</span>}>
-                  <PdfClient variant="download" src={src} kind={kind} fileName={fileName} />
+                  <PdfClient
+                    key={`${kind}-${downloadTick}`}
+                    variant="download"
+                    src={src}
+                    kind={kind}
+                    fileName={fileName}
+                    autoDownload
+                  />
                 </Suspense>
               </ClientOnly>
             )}
