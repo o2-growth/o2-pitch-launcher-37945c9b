@@ -101,18 +101,43 @@ export default function PdfClient({ variant, src, kind, snap, fileName, autoDown
           overflow: 'hidden',
           height: '82vh',
           background: 'var(--bg-elev)',
+          display: 'flex',
+          flexDirection: 'column',
         }}
       >
         {err ? (
           <div style={{ padding: 32, color: '#FF6B6B' }}>Falha ao gerar PDF: {err}</div>
         ) : url ? (
-          <iframe
-            src={url}
-            title={fileName}
-            width="100%"
-            height="100%"
-            style={{ border: 'none', display: 'block' }}
-          />
+          <>
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                gap: 12,
+                padding: '10px 14px',
+                borderBottom: '1px solid var(--border)',
+                background: 'var(--bg-elev-2, var(--bg-elev))',
+              }}
+            >
+              <span className="mono" style={{ fontSize: 11, color: 'var(--fg-subtle)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
+                {fileName}
+              </span>
+              <span style={{ display: 'flex', gap: 8 }}>
+                <a href={url} target="_blank" rel="noopener noreferrer" className="btn btn-ghost btn-sm">
+                  Abrir em nova aba
+                </a>
+                <a href={url} download={fileName} className="btn btn-primary btn-sm">
+                  <Icon.Download size={14} /> Baixar PDF
+                </a>
+              </span>
+            </div>
+            <iframe
+              src={url}
+              title={fileName}
+              style={{ border: 'none', flex: 1, width: '100%', background: '#525659' }}
+            />
+          </>
         ) : (
           <div style={{ padding: 32, color: 'var(--fg-subtle)' }}>Renderizando PDF…</div>
         )}
