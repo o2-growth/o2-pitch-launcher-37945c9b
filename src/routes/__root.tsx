@@ -81,8 +81,16 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "O2 Pitch Engine" },
+      { title: "O2 Pitch Deck" },
       { name: "description", content: "Teaser e Book auto-atualizados de Oxy + BP + Storytelling." },
+      { property: "og:title", content: "O2 Pitch Deck" },
+      { name: "twitter:title", content: "O2 Pitch Deck" },
+      { property: "og:description", content: "Teaser e Book auto-atualizados de Oxy + BP + Storytelling." },
+      { name: "twitter:description", content: "Teaser e Book auto-atualizados de Oxy + BP + Storytelling." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/3712d046-80ce-4ec6-b53e-754641ec0f72/id-preview-559c4b2b--fd9ab30d-43ce-4192-abae-c7ea5a2aae0d.lovable.app-1780107218895.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/3712d046-80ce-4ec6-b53e-754641ec0f72/id-preview-559c4b2b--fd9ab30d-43ce-4192-abae-c7ea5a2aae0d.lovable.app-1780107218895.png" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:type", content: "website" },
     ],
     links: [
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
