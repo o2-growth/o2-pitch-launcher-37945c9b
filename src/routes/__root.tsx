@@ -189,11 +189,9 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       <ClientOnly fallback={<div style={{ minHeight: "100vh" }} />}>
-        {() => (
-          <AuthGate>
-            <Chrome />
-          </AuthGate>
-        )}
+        <AuthGate>
+          <Chrome />
+        </AuthGate>
       </ClientOnly>
     </QueryClientProvider>
   );
