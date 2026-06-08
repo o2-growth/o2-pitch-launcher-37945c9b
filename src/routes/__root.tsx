@@ -15,6 +15,9 @@ import { reportLovableError } from "../lib/lovable-error-reporting";
 import { BrandMark } from "../components/BrandMark";
 import { Icon } from "../components/Icons";
 import { useTheme } from "../hooks/useTheme";
+import { AuthGate } from "../components/AuthGate";
+import { ClientOnly } from "../components/ClientOnly";
+import { supabase } from "@/integrations/supabase/client";
 
 function NotFoundComponent() {
   return (
@@ -155,6 +158,16 @@ function Chrome() {
               aria-label={`Trocar para tema ${theme === "dark" ? "claro" : "escuro"}`}>
               {theme === "dark" ? <Icon.Sun /> : <Icon.Moon />}
             </button>
+            <button
+              type="button"
+              className="icon-btn"
+              onClick={() => supabase.auth.signOut()}
+              aria-label="Sair"
+              title="Sair"
+              style={{ marginLeft: 8, fontSize: 12, padding: "0 10px" }}
+            >
+              Sair
+            </button>
           </div>
         </div>
       </header>
@@ -175,7 +188,11 @@ function RootComponent() {
   const { queryClient } = Route.useRouteContext();
   return (
     <QueryClientProvider client={queryClient}>
-      <Chrome />
+      <ClientOnly fallback={<div style={{ minHeight: "100vh" }} />}>
+        <AuthGate>
+          <Chrome />
+        </AuthGate>
+      </ClientOnly>
     </QueryClientProvider>
   );
 }
